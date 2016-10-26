@@ -3,7 +3,7 @@ import java.util.Vector;
 public class NQueens extends Problem<NQueenState, NQueenAction> {
 	int n;
 
-	public NQueens() {
+	public NQueens(int n) {
 		this.n = n;
 	}
 
@@ -18,19 +18,26 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 
 	@Override
 	Vector<NQueenAction> actions(NQueenState state) {
+
 		Vector<NQueenAction> actions = new Vector<>(0);
-		boolean[] can = new boolean[n];
-		for(int i=0;i<n;i++)
-			can[i]=true;
-		for(int i=0;i<n;i++){
-			if(state.board[i]==-1)
-				break;
-			else{
-				can[state.board[i]]=false;
-			}
+		int put_time = 0;
+		for (int i = 0; i < n; i++) {
+			if (state.board[i] != -1)
+				put_time++;
 		}
-		for(int i=0;i<n;i++){
-			if(can[i]==true)
+		if (put_time == n)
+			return actions;
+
+		boolean[] can = new boolean[n];
+		for (int i = 0; i < n; i++)
+			can[i] = true;
+
+		for (int i = 0; i < put_time; i++) {
+			can[state.board[i]] = false;
+		}
+
+		for (int i = 0; i < n; i++) {
+			if (can[i] == true)
 				actions.addElement(new NQueenAction(i));
 		}
 		return actions;
@@ -38,8 +45,10 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 
 	@Override
 	NQueenState result(NQueenState state, NQueenAction action) {
-		int put_position;
-		int[] temp = new int[state.board.length];
+		int[] temp = new int[n];
+		for (int i = 0; i < n; i++)
+			temp[i] = -1;
+
 		for (int i = 0; i < n; i++) {
 			if (state.board[i] == -1) {
 				temp[i] = action.actionNum;
@@ -59,17 +68,28 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 
 	@Override
 	boolean goal(NQueenState state) {
-		for(int i=0;i<n;i++)
-			if(state.board[i]==-1)
+		for (int i = 0; i < n; i++)
+			if (state.board[i] == -1)
 				return false;
 		for (int i = 0; i < n; i++)
 			for (int j = i + 1; j < n; j++) {
 				if (Math.abs(i - j) == Math
 						.abs(state.board[i] - state.board[j]))
-					;
-				return false;
+					return false;
 			}
 		return true;
+	}
+
+	public static void main(String[] args) {
+		NQueens nQueens = new NQueens(8);
+		BFS<NQueenState, NQueenAction> bfs = new BFS<>(nQueens);
+	}
+
+	@Override
+	void print(NQueenState state) {
+		for (int i = 0; i < n; i++)
+			System.out.print(state.board[i] + "\t");
+		System.out.println();
 	}
 }
 
