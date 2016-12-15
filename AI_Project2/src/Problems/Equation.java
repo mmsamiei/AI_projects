@@ -58,7 +58,7 @@ public class Equation extends Problem<Double, Double> {
 	public Double mutation(Double x) {
 		// Gaussian Mutation with standard derivation 0.1 and Avg 0
 		Random random = new Random();
-		double temp = x + random.nextGaussian() * 0.1;
+		double temp = x + random.nextGaussian() * 0.5;
 		if(temp > 3.14)
 			return 3.14;
 		if(temp < 0.2)
@@ -66,10 +66,12 @@ public class Equation extends Problem<Double, Double> {
 		return temp;
 	}
 	public static void main(String[] args) {
+		int numOfPopulation = 20;
+		int numOfGeneration = 10;
+		double mutationChance = 0.1;
 		Equation equation = new Equation();
-		GeneticAlgorithme<Double, Double> geneticAlgorithme = new GeneticAlgorithme<>(equation, 1000, 100, 0.05);
+		GeneticAlgorithme<Double, Double> geneticAlgorithme = new GeneticAlgorithme<>(equation, numOfPopulation , numOfGeneration, mutationChance);
 		geneticAlgorithme.solve();
-		
 	}
 	
 }
