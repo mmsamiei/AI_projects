@@ -124,6 +124,16 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 		}
 		return new NQueenState(n, board, 0);
 	}
+
+	@Override
+	public NQueenState crossOver(NQueenState x, NQueenState y) {
+		return null;
+	}
+
+	@Override
+	public NQueenState mutation(NQueenState x) {
+		return null;
+	}
 }
 
 class NQueenState {
