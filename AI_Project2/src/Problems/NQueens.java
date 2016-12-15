@@ -26,8 +26,9 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 
 		Vector<NQueenAction> actions = new Vector<>(0);
 
-		/*if (state.turn == n)
-			return actions;*/
+		/*
+		 * if (state.turn == n) return actions;
+		 */
 
 		for (int i = 0; i < n; i++) {
 			actions.addElement(new NQueenAction(i));
@@ -45,10 +46,9 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 		temp[state.turn] = temp[action.actionNum];
 		temp[action.actionNum] = tempInt;
 
-		NQueenState result = new NQueenState(n, temp, (state.turn + 1)%8);
+		NQueenState result = new NQueenState(n, temp, (state.turn + 1) % 8);
 		return result;
 	}
-
 
 	@Override
 	public boolean goal(NQueenState state) {
@@ -65,19 +65,20 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 	}
 
 	public static void main(String[] args) {
-		
-		NQueens nQueens = new NQueens(8);
-		/*HillClimbing<NQueenState, NQueenAction> hillClimbing = new HillClimbing<>(
-				nQueens);*/
-		//hillClimbing.first_choice();
-		//hillClimbing.simple();
-		//hillClimbing.Stochastic();
-		//hillClimbing.random_restart();
-		
-		SimulatedAnnealing<NQueenState, NQueenAction> simulatedAnnealing;
-		simulatedAnnealing = new SimulatedAnnealing<>(nQueens);
-		simulatedAnnealing.search(2);
-		
+
+		NQueens nQueens = new NQueens(8);// 8 is for 8 Queen
+
+		HillClimbing<NQueenState, NQueenAction> hillClimbing = new HillClimbing<>(
+				nQueens);
+
+		// hillClimbing.first_choice();
+		// hillClimbing.simple();
+		// hillClimbing.Stochastic();
+		// hillClimbing.random_restart();
+
+		//SimulatedAnnealing<NQueenState, NQueenAction> simulatedAnnealing;
+		//simulatedAnnealing = new SimulatedAnnealing<>(nQueens);
+		//simulatedAnnealing.search(1);// the input value is for choosing the simulatedAnnealing method from 0,1,2
 
 	}
 
@@ -87,8 +88,6 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 			System.out.print(state.board[i] + "\t");
 		System.out.println();
 	}
-
-
 
 	@Override
 	public double objective_function(NQueenState state) {
