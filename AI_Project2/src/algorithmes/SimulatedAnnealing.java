@@ -33,14 +33,14 @@ public class SimulatedAnnealing<S, A> {
 			nextState = problem.result(currentState, actions.elementAt(random));
 			double deltaE = problem.objective_function(nextState)
 					- problem.objective_function(currentState);
-			if(!problem.maximize)deltaE*=-1;
 			visitedNodes++;
 			if (deltaE > 0)
 				currentState = nextState;
 			else {
 				double possibility = Math.random();
-				if (possibility < Math.pow((Math.E), (deltaE / T)))
+				if (possibility < Math.pow((Math.E), (deltaE / T))) {
 					currentState = nextState;
+				}
 			}
 		}
 		print(visitedNodes, expandedNodes, currentState);
@@ -50,16 +50,18 @@ public class SimulatedAnnealing<S, A> {
 		Double T;
 		switch (method) {
 		case 0:
-			T = (double) (100 / (double) t);
+			T = (double) (100 * Math.pow(0.9, t));
 			return T;
 		case 1:
-			T = (double) 1;
+			T = (double) (100 / (double) t);
 			return T;
 		case 2:
-			T = (double) Integer.MAX_VALUE;
+			T = (double) (100 / (double)( t*t));
+			return T;
+		default:
+			T = (double) (100 / (double)( t*t));
 			return T;
 		}
-		return 200 / t;
 	}
 
 	public void print(int visitedNodes, int expandedNodes, S state) {

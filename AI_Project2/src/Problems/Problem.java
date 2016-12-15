@@ -9,7 +9,6 @@ public abstract class Problem<State,Action>{
 	 public abstract void print(State state);
 	 public abstract double objective_function(State state);
 	 public abstract State randomState();
-	 public boolean maximize;	//for determine that our goal is maximize or minimize the objective function
 	 public abstract State crossOver(State x,State y);
 	 public abstract State mutation(State x);
 }

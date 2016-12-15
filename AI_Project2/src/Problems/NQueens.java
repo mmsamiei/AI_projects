@@ -10,7 +10,6 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 
 	public NQueens(int n) {
 		this.n = n;
-		maximize = false;
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 		
 		SimulatedAnnealing<NQueenState, NQueenAction> simulatedAnnealing;
 		simulatedAnnealing = new SimulatedAnnealing<>(nQueens);
-		simulatedAnnealing.search(1);
+		simulatedAnnealing.search(2);
 		
 
 	}
@@ -102,7 +101,7 @@ public class NQueens extends Problem<NQueenState, NQueenAction> {
 				}
 			}
 		}
-		return collision;
+		return (-collision);
 	}
 
 	@Override

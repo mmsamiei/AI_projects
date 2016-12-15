@@ -18,25 +18,20 @@ public class HillClimbing<S, A> {
 
 		S currentState = problem.initiallState();
 		S bestNeighbour = null;
-		double bestNeighbourFitness = Integer.MAX_VALUE;
+		double bestNeighbourFitness = Integer.MIN_VALUE;
 		while (true) {
 			expandedNode++;
 			// Select best neighbour
 			for (A action : problem.actions(currentState)) {
 				S neighbour = problem.result(currentState, action);
 				visitedNode++;
-				if ((!problem.maximize && problem.objective_function(neighbour) < bestNeighbourFitness)
-						|| (problem.maximize && problem
-								.objective_function(neighbour) > bestNeighbourFitness)) {
+				if (problem.objective_function(neighbour) > bestNeighbourFitness) {
 					bestNeighbour = neighbour;
 					bestNeighbourFitness = problem
 							.objective_function(bestNeighbour);
 				}
 			}
-			if ((!problem.maximize && bestNeighbourFitness < problem
-					.objective_function(currentState))
-					|| (problem.maximize && bestNeighbourFitness > problem
-							.objective_function(currentState)))
+			if (bestNeighbourFitness > problem.objective_function(currentState))
 				currentState = bestNeighbour;
 			else
 				break;
@@ -50,7 +45,7 @@ public class HillClimbing<S, A> {
 
 		S currentState = problem.initiallState();
 		S bestNeighbour = null;
-		double bestNeighbourFitness = Integer.MAX_VALUE;
+		double bestNeighbourFitness = Integer.MIN_VALUE;
 		while (true) {
 			Vector<S> goodNeighbours = new Vector<S>();
 			expandedNode++;
@@ -58,11 +53,8 @@ public class HillClimbing<S, A> {
 			for (A action : problem.actions(currentState)) {
 				S neighbour = problem.result(currentState, action);
 				visitedNode++;
-				if ((!problem.maximize && problem.objective_function(neighbour) < problem
-						.objective_function(currentState))
-						|| (problem.maximize && problem
-								.objective_function(neighbour) > problem
-								.objective_function(currentState))) {
+				if (problem.objective_function(neighbour) > problem
+						.objective_function(currentState)) {
 					goodNeighbours.addElement(neighbour);
 				}
 			}
@@ -82,7 +74,7 @@ public class HillClimbing<S, A> {
 
 		S currentState = problem.initiallState();
 		S bestNeighbour = null;
-		double bestNeighbourFitness = Integer.MAX_VALUE;
+		double bestNeighbourFitness = Integer.MIN_VALUE;
 		while (true) {
 			expandedNode++;
 			// Select best neighbour
@@ -104,11 +96,8 @@ public class HillClimbing<S, A> {
 				S neighbour = problem.result(currentState,
 						actions.elementAt(random));
 				visitedNode++;
-				if ((!problem.maximize && problem.objective_function(neighbour) < problem
-						.objective_function(currentState))
-						|| (problem.maximize && problem
-								.objective_function(neighbour) > problem
-								.objective_function(currentState))) {
+				if (problem.objective_function(neighbour) > problem
+						.objective_function(currentState)) {
 					currentState = neighbour;
 					break;
 				}
@@ -131,25 +120,20 @@ public class HillClimbing<S, A> {
 
 		S currentState = problem.initiallState();
 		S bestNeighbour = null;
-		double bestNeighbourFitness = Integer.MAX_VALUE;
+		double bestNeighbourFitness = Integer.MIN_VALUE;
 		while (true) {
 			expandedNode++;
 			// Select best neighbour
 			for (A action : problem.actions(currentState)) {
 				S neighbour = problem.result(currentState, action);
 				visitedNode++;
-				if ((!problem.maximize && problem.objective_function(neighbour) < bestNeighbourFitness)
-						|| (problem.maximize && problem
-								.objective_function(neighbour) > bestNeighbourFitness)) {
+				if (problem.objective_function(neighbour) > bestNeighbourFitness) {
 					bestNeighbour = neighbour;
 					bestNeighbourFitness = problem
 							.objective_function(bestNeighbour);
 				}
 			}
-			if ((!problem.maximize && bestNeighbourFitness < problem
-					.objective_function(currentState))
-					|| (problem.maximize && bestNeighbourFitness > problem
-							.objective_function(currentState)))
+			if (bestNeighbourFitness > problem.objective_function(currentState))
 				currentState = bestNeighbour;
 			else {
 				if (problem.goal(currentState))
