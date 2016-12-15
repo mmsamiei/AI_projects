@@ -62,7 +62,7 @@ public class GeneticAlgorithme<S, A> {
 			System.out.println("\t\twith fitness:\t "+problem.objective_function(worst));
 		}
 		if(optimal)System.out.println("we find optimal solution by "+numberOfGeneration+" Generation");
-		else System.out.println("\nwe can not find optimal solution so we finish Algorithme in limit "+numberOfGeneration);
+		else System.out.println("\nwe couldn't  find optimal solution so we finish Algorithme in limit "+numberOfGeneration);
 	}
 
 	private void makeInitialPopulation() {

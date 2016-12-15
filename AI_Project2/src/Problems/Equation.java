@@ -1,5 +1,6 @@
 package Problems;
 
+import java.util.Random;
 import java.util.Vector;
 
 import algorithmes.GeneticAlgorithme;
@@ -55,13 +56,18 @@ public class Equation extends Problem<Double, Double> {
 
 	@Override
 	public Double mutation(Double x) {
-		Double rand = Math.random()*2.94;
-		rand += 0.2;
-		return rand;
+		// Gaussian Mutation with standard derivation 0.1 and Avg 0
+		Random random = new Random();
+		double temp = x + random.nextGaussian() * 0.1;
+		if(temp > 3.14)
+			return 3.14;
+		if(temp < 0.2)
+			return 0.2;
+		return temp;
 	}
 	public static void main(String[] args) {
 		Equation equation = new Equation();
-		GeneticAlgorithme<Double, Double> geneticAlgorithme = new GeneticAlgorithme<>(equation, 20, 10, 0.05);
+		GeneticAlgorithme<Double, Double> geneticAlgorithme = new GeneticAlgorithme<>(equation, 1000, 100, 0.05);
 		geneticAlgorithme.solve();
 		
 	}
